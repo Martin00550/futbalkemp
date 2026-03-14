@@ -39,8 +39,6 @@
                     <div class="progress-step" id="p-step-3" data-label="Platba">3</div>
                 </div>
 
-                <div id="mock-indicator" class="mock-indicator">TESTOVACÍ REŽIM (MOCK)</div>
-
                 <!-- Step 1: Country Selection -->
                 <div id="step-1" class="step active">
                     <h2 class="form-title">V KTOREJ KRAJINE SA CHCEŠ REGISTROVAŤ?</h2>
@@ -56,11 +54,16 @@
                             </div>
                         </button>
                     </div>
+                    
+                    <div id="mock-indicator" class="mock-indicator">TESTOVACÍ REŽIM (MOCK)</div>
                 </div>
 
                 <!-- Step 2: Registration Form -->
                 <div id="step-2" class="step">
-                    <button class="back-btn" onclick="goToStep(1)">← SPÄŤ DO VÝBERU</button>
+                    <button class="back-btn" onclick="goToStep(1)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        SPÄŤ DO VÝBERU
+                    </button>
                     <h2 id="form-title" class="form-title">VYPLŇ OSOBNÉ ÚDAJE</h2>
 
                     <form id="registration-form" onsubmit="handleFormSubmit(event)">
@@ -74,7 +77,6 @@
                             <div class="input-group">
                                 <label for="name">CELÉ MENO HRÁČA</label>
                                 <input type="text" id="name" name="name" placeholder="napr. Ján Kováč" required>
-                                <span class="helper-text">Meno a priezvisko účastníka</span>
                             </div>
                             <div class="input-group">
                                 <label for="email">E-MAILOVÁ ADRESA</label>
@@ -91,6 +93,8 @@
                             <div class="loader" id="loader"></div>
                         </button>
                     </form>
+                    
+                    <div id="mock-indicator" class="mock-indicator">TESTOVACÍ REŽIM (MOCK)</div>
                 </div>
 
                 <!-- Step 3: Success & Payment -->
