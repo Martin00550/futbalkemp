@@ -169,6 +169,34 @@ function setupSuccessPage() {
     document.getElementById('pay-amount').innerText = pay.amount;
     document.getElementById('pay-iban').innerText = pay.iban;
     document.getElementById('pay-vs').innerText = currentVS;
+
+    // Localize Payment Row Labels
+    const labels = {
+        SK: {
+            header: 'REKAPITULÁCIA PLATBY',
+            amount: 'SUMA K ÚHRADE:',
+            ibanLabel: 'IBAN (Číslo účtu):',
+            vs: 'VARIABILNÝ SYMBOL:'
+        },
+        CZ: {
+            header: 'REKAPITULACE PLATBY',
+            amount: 'ČÁSTKA K ÚHRADĚ:',
+            ibanLabel: 'IBAN (Číslo účtu):',
+            vs: 'VARIABILNÍ SYMBOL:'
+        }
+    };
+
+    const currentLabels = labels[currentCountry];
+    
+    const header = document.querySelector('.payment-header-premium');
+    if (header) header.innerText = currentLabels.header;
+
+    const rows = document.querySelectorAll('.payment-row');
+    if (rows.length >= 3) {
+        rows[0].querySelector('span').innerText = currentLabels.amount;
+        rows[1].querySelector('span').innerText = currentLabels.ibanLabel;
+        rows[2].querySelector('span').innerText = currentLabels.vs;
+    }
 }
 
 // Initial check for Dev Mode indicator
