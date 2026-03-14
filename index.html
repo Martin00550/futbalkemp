@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC CAMP 2026 | Oficiálna Registrácia</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Bebas+Neue&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-base"></div>
+    <div class="background-radial"></div>
+
+    <!-- Decorative floating elements -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <main class="form-page-container">
+        <div class="hero-content-minimal">
+            <h1 class="hero-title-minimal">FUTBALOVÝ <span class="text-gradient">KEMP 2026</span></h1>
+            <p class="hero-subtitle-minimal">Tvoja cesta k profesionálnemu futbalu začína tu. Vyber si krajinu a vyplň
+                údaje nižšie.</p>
+        </div>
+
+        <div class="registration-form-focus">
+            <div class="glass-card">
+                <!-- Progress Indicator -->
+                <div class="progress-container">
+                    <div class="progress-step active" id="p-step-1" data-label="Krajina">1</div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" id="p-step-2" data-label="Údaje">2</div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" id="p-step-3" data-label="Platba">3</div>
+                </div>
+
+                <div id="mock-indicator" class="mock-indicator">TESTOVACÍ REŽIM (MOCK)</div>
+
+                <!-- Step 1: Country Selection -->
+                <div id="step-1" class="step active">
+                    <h2 class="form-title">V KTOREJ KRAJINE SA CHCEŠ REGISTROVAŤ?</h2>
+                    <div class="grid-buttons">
+                        <button class="country-btn-premium active-sk" onclick="selectCountry('SK')">
+                            <div class="btn-info">
+                                <span class="country-name-premium">SLOVENSKO</span>
+                            </div>
+                        </button>
+                        <button class="country-btn-premium active-cz" onclick="selectCountry('CZ')">
+                            <div class="btn-info">
+                                <span class="country-name-premium">ČESKO</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Registration Form -->
+                <div id="step-2" class="step">
+                    <button class="back-btn" onclick="goToStep(1)">← SPÄŤ DO VÝBERU</button>
+                    <h2 id="form-title" class="form-title">VYPLŇ OSOBNÉ ÚDAJE</h2>
+
+                    <form id="registration-form" onsubmit="handleFormSubmit(event)">
+                        <input type="hidden" name="access_key" id="access_key">
+                        <input type="hidden" name="subject" value="Nová registrácia na Futbalový Kemp 2026">
+                        <input type="hidden" name="from_name" value="FC CAMP 2026">
+                        <input type="hidden" name="country" id="form-country">
+                        <input type="hidden" name="timestamp" id="form-timestamp">
+
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="name">CELÉ MENO HRÁČA</label>
+                                <input type="text" id="name" name="name" placeholder="napr. Ján Kováč" required>
+                                <span class="helper-text">Meno a priezvisko účastníka</span>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">E-MAILOVÁ ADRESA</label>
+                                <input type="email" id="email" name="email" placeholder="jan.kovac@email.sk" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="phone">TELEFÓNNE ČÍSLO</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+421 900 000 000" required>
+                            </div>
+                        </div>
+                        <div id="form-status" class="form-status"></div>
+                        <button type="submit" class="submit-btn-premium" id="submit-btn">
+                            <span>ODOSLAŤ PRIHLÁŠKU</span>
+                            <div class="loader" id="loader"></div>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Step 3: Success & Payment -->
+                <div id="step-3" class="step">
+                    <div class="success-icon-premium">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="club-title">VITAJ V TÍME!</h2>
+                    <p class="success-msg">Priprav sa na kemp! Nižšie nájdeš platobné údaje k úhrade tvojho miesta.</p>
+
+                    <div class="payment-card-premium">
+                        <div class="payment-header-premium">REKAPITULÁCIA PLATBY</div>
+                        <div class="payment-info">
+                            <div class="payment-row">
+                                <span>SUMA K ÚHRADE:</span>
+                                <strong id="pay-amount">€250</strong>
+                            </div>
+                            <div class="payment-row">
+                                <span>IBAN (Číslo účtu):</span>
+                                <div class="iban-container">
+                                    <strong id="pay-iban">SK00 0000 0000 0000 0000 0000</strong>
+                                    <button type="button" class="copy-btn" onclick="copyIban()" aria-label="Kopírovať IBAN">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="payment-row">
+                                <span>VARIABILNÝ SYMBOL:</span>
+                                <strong id="pay-vs">TELEFÓN</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="reset-btn-premium" onclick="location.reload()">NOVÁ REGISTRÁCIA</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="minimal-footer">
+            <p>&copy; 2026 FC CAMP Academy. Všetky práva vyhradené. | <a
+                    href="mailto:info@fccamp2026.sk">info@fccamp2026.sk</a></p>
+        </footer>
+    </main>
+
+    <script type="module" src="/script.js"></script>
+</body>
+
+</html>
